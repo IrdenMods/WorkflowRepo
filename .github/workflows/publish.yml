@@ -17,6 +17,10 @@ on:
         required: false
         type: boolean
         default: false
+      mod_name:
+        description: Name of the mod
+        required: true
+        type: string
 
 jobs:
   build:
@@ -76,7 +80,7 @@ jobs:
         uses: softprops/action-gh-release@v1
         with:
           body_path: CHANGELOG.md
-          files: ${{ env.MOD_NAME }}.pak
+          files: ${{ inputs.mod_name }}.pak
           tag_name: v${{ steps.extract_version.outputs.version }}
           name: Release V${{ steps.extract_version.outputs.version }}
 
@@ -91,7 +95,7 @@ jobs:
         uses: logickoder/google-drive-upload@main
         with:
           credentials: ${{ secrets.GCP_CREDENTIAL }}
-          filename: ${{ env.MOD_NAME }}.pak
+          filename: ${{ inputs.mod_name }}.pak
           folderId: ${{ secrets.DRIVE_FOLDER_ID }}
           overwrite: "true"
 
@@ -100,7 +104,7 @@ jobs:
         uses: tsickert/discord-webhook@v6.0.0
         with:
           webhook-url: ${{ secrets.WEBHOOK_URL }}
-          filename: ${{ env.MOD_NAME }}.pak
-          content: "<@&${{ vars.ROLE_MENTION }}> ${{ env.MOD_NAME }} V${{ steps.extract_version.outputs.version }}\n${{ steps.read_file.outputs.contents }}"
+          filename: ${{ inputs.mod_name }}.pak
+          content: "<@&${{ vars.ROLE_MENTION }}> ${{ inputs.mod_name }} V${{ steps.extract_version.outputs.version }}\n${{ steps.read_file.outputs.contents }}"
 
         
