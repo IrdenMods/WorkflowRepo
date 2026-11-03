@@ -73,7 +73,7 @@ jobs:
       - name: Run Asset Packer
         uses: KrashV/starbound-asset-packer-action@v1
         with:
-          output: ${{ env.MOD_NAME }}.pak
+          output: ${{ inputs.MOD_NAME }}.pak
 
       - name: 'Create GitHub Release'
         if: ${{inputs.release}}
