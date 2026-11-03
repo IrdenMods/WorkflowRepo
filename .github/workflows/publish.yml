@@ -1,21 +1,22 @@
 name: Generate Archive and Create Release
 on:
   workflow_call:
-    release:
-      description: Create Github release
-      required: false
-      type: boolean
-      default: false
-    upload_to_gd:
-      description: Uploads the mod to Google Drive
-      required: false
-      type: boolean
-      default: false
-    notify_discord:
-      description: Triggers a webhook to notify discord users
-      required: false
-      type: boolean
-      default: false
+    inputs:
+      release:
+        description: Create Github release
+        required: false
+        type: boolean
+        default: false
+      upload_to_gd:
+        description: Uploads the mod to Google Drive
+        required: false
+        type: boolean
+        default: false
+      notify_discord:
+        description: Triggers a webhook to notify discord users
+        required: false
+        type: boolean
+        default: false
 
 jobs:
   build:
